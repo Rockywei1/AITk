@@ -1,0 +1,144 @@
+<UserControl x:Class="AITk.App.Views.RunnerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="Task Runner" 
+                       FontSize="28" FontWeight="Bold"
+                       Foreground="{StaticResource TextPrimaryBrush}"/>
+            <TextBlock Text="Execute commands with auto-retry loop"
+                       Foreground="{StaticResource TextSecondaryBrush}" FontSize="14"/>
+        </StackPanel>
+
+        <!-- Command Input Row -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="0"
+                         Style="{StaticResource ModernTextBoxStyle}"
+                         Text="{Binding Command, UpdateSourceTrigger=PropertyChanged}"
+                         FontFamily="Consolas" FontSize="14"/>
+
+                <Button Grid.Column="1" Content="▶ Run Once"
+                        Command="{Binding RunCommand}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="12,0,0,0"/>
+
+                <Button Grid.Column="2" Content="⏹ Stop"
+                        Command="{Binding StopCommand}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="8,0,0,0"/>
+            </Grid>
+        </Border>
+
+        <!-- Loop Control Row -->
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Max Retries -->
+                <TextBlock Grid.Column="0" Text="Max Retries:" 
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <TextBox Grid.Column="1"
+                         Style="{StaticResource ModernTextBoxStyle}"
+                         Text="{Binding MaxRetries, UpdateSourceTrigger=PropertyChanged}"
+                         TextAlignment="Center"/>
+
+                <!-- Delay -->
+                <TextBlock Grid.Column="2" Text="Delay (s):" 
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           VerticalAlignment="Center" Margin="16,0,8,0"/>
+                <TextBox Grid.Column="3"
+                         Style="{StaticResource ModernTextBoxStyle}"
+                         Text="{Binding DelayBetweenRetries, UpdateSourceTrigger=PropertyChanged}"
+                         TextAlignment="Center"/>
+
+                <!-- Loop Button -->
+                <Button Grid.Column="5" Content="🔄 Start Loop"
+                        Command="{Binding RunLoopCommand}"
+                        Style="{StaticResource PremiumButtonStyle}"/>
+
+                <!-- Copy Button -->
+                <Button Grid.Column="6" Content="📋 Copy"
+                        Command="{Binding CopyOutputCommand}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="8,0,0,0"/>
+            </Grid>
+        </Border>
+
+        <!-- Terminal Output -->
+        <Border Grid.Row="3" Background="#0D1117" CornerRadius="8"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+            <ScrollViewer x:Name="OutputScroller"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Auto">
+                <TextBlock Text="{Binding Output}"
+                           FontFamily="Consolas, Courier New" FontSize="13"
+                           Foreground="#C9D1D9" Padding="16" TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="4" Background="{StaticResource SurfaceBrush}"
+                CornerRadius="8" Padding="16,10" Margin="0,12,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Status -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Ellipse Width="8" Height="8" Fill="{Binding StatusColor}"
+                             Margin="0,0,8,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Status}"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Attempt Counter -->
+                <TextBlock Grid.Column="1"
+                           Text="{Binding CurrentAttempt, StringFormat='Attempt: {0}'}"
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Margin="0,0,24,0" VerticalAlignment="Center"/>
+
+                <!-- Elapsed Time -->
+                <TextBlock Grid.Column="2"
+                           Text="{Binding ElapsedTime, StringFormat='⏱ {0}'}"
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Margin="0,0,24,0" VerticalAlignment="Center"/>
+
+                <!-- Exit Code -->
+                <TextBlock Grid.Column="3" Text="{Binding ExitCodeDisplay}"
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

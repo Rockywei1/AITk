@@ -1,0 +1,144 @@
+<UserControl x:Class="AITk.App.Views.PRReviewView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:AITk.App.ViewModels"
+             Background="#1E1E2E">
+    
+    <UserControl.DataContext>
+        <vm:PRReviewViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>  <!-- Header -->
+            <RowDefinition Height="Auto"/>  <!-- Project Path -->
+            <RowDefinition Height="Auto"/>  <!-- Scan Mode -->
+            <RowDefinition Height="Auto"/>  <!-- Review Aspects -->
+            <RowDefinition Height="*"/>     <!-- Prompt Preview -->
+            <RowDefinition Height="Auto"/>  <!-- Actions -->
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="🔍 PR Review Toolkit" 
+                       FontSize="28" FontWeight="Bold"
+                       Foreground="#CDD6F4"/>
+            <TextBlock Text="Comprehensive code review using specialized AI agents" 
+                       FontSize="14" Foreground="#6C7086" Margin="0,5,0,0"/>
+        </StackPanel>
+        
+        <!-- Working Directory -->
+        <Grid Grid.Row="1" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="📁 Project:" VerticalAlignment="Center" 
+                       Foreground="#A6ADC8" Margin="0,0,10,0"/>
+            <TextBox Grid.Column="1" Text="{Binding WorkingDirectory, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource ModernTextBoxStyle}"/>
+            <Button Grid.Column="2" Content="📂 Browse" Command="{Binding BrowseCommand}"
+                    Style="{StaticResource PremiumButtonStyle}" Margin="10,0,0,0" Padding="20,10"/>
+        </Grid>
+        
+        <!-- Scan Mode Selection -->
+        <Border Grid.Row="2" Background="#181825" CornerRadius="8" 
+                Padding="15" Margin="0,0,0,15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Text="Scan Mode:" Foreground="#CDD6F4" 
+                           FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton x:Name="RbGitMode" Content="🔀 Git Changes Only" 
+                                 IsChecked="{Binding GitModeEnabled, Mode=TwoWay}"
+                                 GroupName="ScanMode"
+                                 Foreground="#94E2D5" Margin="0,0,30,0"
+                                 ToolTip="Only review files with uncommitted Git changes"/>
+                    <RadioButton x:Name="RbFolderMode" Content="📁 Scan All Files" 
+                                 GroupName="ScanMode"
+                                 Foreground="#F9E2AF"
+                                 ToolTip="Review all code files in the folder (up to 100 files)"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <!-- Review Aspects Selection -->
+        <Border Grid.Row="3" Background="#181825" CornerRadius="8" 
+                Padding="15" Margin="0,0,0,15">
+            <StackPanel>
+                <TextBlock Text="Review Aspects (select what to analyze):" 
+                           Foreground="#CDD6F4" FontWeight="Bold" Margin="0,0,0,10"/>
+                <WrapPanel>
+                    <CheckBox Content="📖 Code Review" IsChecked="{Binding ReviewCode}" 
+                              Foreground="#F5C2E7" Margin="0,0,20,8"/>
+                    <CheckBox Content="🧪 Test Coverage" IsChecked="{Binding ReviewTests}" 
+                              Foreground="#94E2D5" Margin="0,0,20,8"/>
+                    <CheckBox Content="⚠️ Error Handling" IsChecked="{Binding ReviewErrors}" 
+                              Foreground="#F9E2AF" Margin="0,0,20,8"/>
+                    <CheckBox Content="💬 Comments" IsChecked="{Binding ReviewComments}" 
+                              Foreground="#89B4FA" Margin="0,0,20,8"/>
+                    <CheckBox Content="📐 Type Design" IsChecked="{Binding ReviewTypes}" 
+                              Foreground="#CBA6F7" Margin="0,0,20,8"/>
+                    <CheckBox Content="✨ Simplify" IsChecked="{Binding ReviewSimplify}" 
+                              Foreground="#A6E3A1" Margin="0,0,20,8"/>
+                </WrapPanel>
+            </StackPanel>
+        </Border>
+        
+        <!-- Generated Review Prompt -->
+        <Border Grid.Row="4" Background="#181825" CornerRadius="8" Padding="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="📋 Review Prompt (AI-ready)" Foreground="#CDD6F4" 
+                           FontWeight="Bold" Margin="15,10,15,5"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto" Margin="10">
+                    <TextBox Text="{Binding PromptPreview, Mode=OneWay}"
+                             IsReadOnly="True"
+                             Background="Transparent"
+                             Foreground="#CDD6F4"
+                             BorderThickness="0"
+                             FontFamily="Consolas"
+                             FontSize="13"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+        
+        <!-- Actions -->
+        <Grid Grid.Row="5" Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Status -->
+            <TextBlock Grid.Column="0" Text="{Binding Status}" 
+                       VerticalAlignment="Center" Foreground="{Binding StatusColor}"/>
+            
+            <!-- Scan Button -->
+            <Button Grid.Column="2" Content="🔎 Scan Changes" 
+                    Command="{Binding ScanCommand}"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    Padding="20,10" Margin="0,0,10,0"/>
+            
+            <!-- Generate Button -->
+            <Button Grid.Column="3" Content="📋 Generate &amp; Copy" 
+                    Command="{Binding GenerateCommand}"
+                    Style="{StaticResource PremiumButtonStyle}"
+                    Padding="25,10"/>
+        </Grid>
+    </Grid>
+</UserControl>
