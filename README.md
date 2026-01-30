@@ -1,78 +1,109 @@
-# AITk (AI Toolkit)
+# AITk: Windows Desktop Tool for AI-Assisted Programming & Prompt Engineering
 
-> **Desktop tool to enhance AI-assisted programming.**
->
-> **提升 AI 辅助编程体验的桌面工具。**
+# AITk: 提升 AI 辅助编程与 Prompt 工程体验的 Windows 桌面工具
 
-[English](#english) | [中文](#chinese)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows)](https://github.com/Rockywei1/AITk)
+[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4)](https://dotnet.microsoft.com/)
+
+[English](#-english) | [中文](#-中文)
 
 ---
 
-<a name="english"></a>
-
 ## 🇬🇧 English
 
-AITk is a Windows desktop application designed to bridge the gap between your code and AI. It generates structured Prompts from your codebase, allowing any AI (IDE plugins, web chats) to better understand your context and intent.
+**AITk (AI Toolkit)** is an open-source **Windows desktop application** built with .NET 8, designed to bridge the gap between your local codebase and Large Language Models (LLMs) like **ChatGPT, Claude, or GitHub Copilot & Antigravity, even your local LLM**.
+
+Instead of manually copying and pasting code, AITk analyzes your project and generates structured, context-aware **Prompts**. This helps AI agents better understand your intent, dependencies, and project structure for more accurate code generation and refactoring.
+
+<div align="center">
+  <img src="docs/images/dashboard.png" alt="AITk Desktop Dashboard - AI-powered development toolkit for Windows .NET" width="800">
+  <p><em>AITk Dashboard: Your central hub for managing AI-driven code tasks and context generation.</em></p>
+</div>
 
 ### 🚀 Key Features
 
-| Module | Description | Use Case |
-|--------|-------------|----------|
-| **Dashboard** | Overview Panel | Quick project status check |
-| **Task Runner** | Command Executor | "Auto-Fix Loop" for build/test errors |
-| **Smart Review** | Git Change Scanner | Generate reviews for uncommitted changes |
-| **Code Polisher** | Code Optimizer | Simplify/Refactor specific files |
-| **PR Review** | Comprehensive Review | Multi-agent analysis for PRs |
+| Module | Description | SEO / Use Case |
+| :--- | :--- | :--- |
+| **Dashboard** | Project Overview Panel | Quick project status check & navigation. |
+| **Task Runner** | Command Executor with **"Auto-Fix Loop"** | Automatically iterates to fix compilation errors or flaky tests using AI suggestions. |
+| **Smart Review** | **Git Change Scanner** | Scans `git diff` (uncommitted changes) and packages them into an AI-readable format for code review. |
+| **Code Polisher** | **Code Optimizer & Refactoring** | Generates specific prompts to "Remove dead code", "Simplify conditionals", or refactor legacy C#/.NET code. |
+| **PR Review** | **Multi-Agent Pull Request Analysis** | A comprehensive system where multiple AI agents analyze PRs for bugs, type safety, and test coverage. |
 
 ### 🛠️ Getting Started
 
-**Prerequisites**: .NET 8.0 SDK, Windows 10/11
+**Prerequisites:** .NET 8.0 SDK, Windows 10/11
 
-```powershell
-# Clone the repository
-git clone https://github.com/yourusername/AITk.git
+```bash
+# 1. Clone the repository
+git clone https://github.com/Rockywei1/AITk.git
 
-# Navigate to project directory
+# 2. Navigate to project directory
 cd AITk
 
-# Build
+# 3. Build the project
 dotnet build
 
-# Run
+# 4. Run the application
 dotnet run --project AITk.App
 ```
 
 ### 📖 Module Guide
 
-1. **Task Runner**: Execute terminal commands with **Auto-Fix Loop**. Great for fixing flaky tests or compilation errors.
-2. **Smart Review**: Scan **uncommitted Git changes** and generate an AI-readable review packet.
-3. **Code Polisher**: Generate **simplification prompts** for complex files (e.g. "Remove dead code", "Simplify conditionals").
-4. **PR Review**: Comprehensive multi-agent review system analyzing code, tests, errors, and types.
+- **Task Runner**: An intelligent terminal wrapper. If a build fails, the Auto-Fix Loop captures the error log and generates a prompt to help you fix it instantly.
+- **Smart Review**: Perfect for pre-commit checks. It converts your local changes into a structured context packet, making it easy to ask an LLM: "Is this code safe to commit?"
+- **Code Polisher**: Ideal for legacy code modernization. It targets specific complex files and applies Prompt Engineering techniques to suggest simplifications.
+- **PR Review**: Simulates a senior engineer review by using multi-agent workflows to inspect your Pull Requests.
 
-### 📄 License
+### 📸 Feature Deep Dive
+
+#### 🤖 Task Runner with Auto-Fix Loop
+
+Automatically iterates to fix compilation errors or flaky tests.
+
+<img src="docs/images/task-runner.png" alt="Task Runner with Auto-Fix Loop for dotnet build" width="800">
+
+#### ✨ Code Polisher (Refactoring Agent)
+
+Generates expert-level prompts to remove dead code and simplify logic.
+
+<img src="docs/images/code-polisher.png" alt="Code Polisher generating refactoring prompts for Python and C#" width="800">
+
+#### � Smart PR Review
+
+Scans uncommitted Git changes and creates a structured context packet for LLM analysis.
+
+<img src="docs/images/pr-review.png" alt="PR Review Toolkit showing AI context prompt generation" width="800">
+
+### �📄 License
 
 **GNU Affero General Public License v3.0 (AGPL-3.0)**
 
-This project is licensed under the **AGPL-3.0**. This is the strictest Open Source license, ensuring that:
+This project is strictly licensed under the AGPL-3.0.
 
-- Any modifications or derivative works must also be Open Source.
-- Integration into proprietary (closed-source) software is strictly prohibited.
-- If you use this software to provide a service over a network, you must release the source code.
-
-**This project is not for sale and cannot be sub-licensed for proprietary commercial use without explicit permission.**
+- ✅ **Open Source**: Modifications must remain open source.
+- 🚫 **No Proprietary Integration**: Cannot be tightly linked into closed-source software.
+- 🌐 **Network Use**: If you run this as a service, source code must be disclosed.
+- ❌ **Non-Commercial**: Not for sale or proprietary sub-licensing without explicit permission.
 
 ---
 
-<a name="chinese"></a>
-
 ## 🇨🇳 中文
 
-AITk 是一款 Windows 桌面应用程序，专为连接你的代码与 AI 而设计。它能根据你的代码库生成结构化的 Prompt（提示词），让任何 AI（无论是 IDE 插件还是网页聊天机器人）都能更准确地理解你的上下文和意图。
+**AITk (AI Toolkit)** 是一款基于 .NET 8 开发的开源 Windows 桌面应用程序，专为连接你的本地代码库与 AI（如 ChatGPT, Claude, Copilot）而设计。
+
+它解决了"复制粘贴代码丢失上下文"的痛点。AITk 能根据你的代码库自动生成结构化的 Prompt（提示词），让 AI 工具能更精准地理解项目结构、依赖关系和编程意图，从而提供更高质量的代码建议。
+
+<div align="center">
+  <img src="docs/images/dashboard.png" alt="AITk 主面板 - Windows .NET 开发者 AI 编程工具" width="800">
+  <p><em>AITk 主面板：管理 AI 驱动代码任务和上下文生成的中心枢纽。</em></p>
+</div>
 
 ### 🚀 核心功能
 
 | 模块 | 功能说明 | 适用场景 |
-|------|----------|----------|
+| :--- | :--- | :--- |
 | **Dashboard** | 总览面板 | 快速查看项目状态 |
 | **Task Runner** | 命令执行器 | "死磕模式" (自动重试) 修复编译/测试错误 |
 | **Smart Review** | 智能审查 | 扫描 Git 未提交变更并生成审查包 |
@@ -85,7 +116,7 @@ AITk 是一款 Windows 桌面应用程序，专为连接你的代码与 AI 而�
 
 ```powershell
 # 克隆仓库
-git clone https://github.com/yourusername/AITk.git
+git clone https://github.com/Rockywei1/AITk.git
 
 # 进入目录
 cd AITk
@@ -99,19 +130,38 @@ dotnet run --project AITk.App
 
 ### 📖 模块指南
 
-1. **Task Runner (任务运行器)**: 支持 **Auto-Fix Loop (死磕模式)** 的终端命令执行器。非常适合自动修复不稳定的测试或编译错误。
-2. **Smart Review (智能审查)**: 扫描 **Git 未提交的变更**，生成 AI 可读的代码审查包。
-3. **Code Polisher (代码磨光机)**: 为复杂文件生成 **代码简化 Prompt**（支持"移除死代码"、"简化条件判断"等选项）。
-4. **PR Review (PR 审查)**: 综合性的多 Agent 审查系统，从代码质量、测试覆盖、错误处理和类型设计等多个维度分析代码。
+- **Task Runner (任务运行器)**: 不仅仅是终端。当遇到报错时，开启"死磕模式"，它会自动提取错误日志并生成修复建议。
+- **Smart Review (智能审查)**: 在 git commit 之前使用。它将你的代码变更打包成 AI 易读的格式，让你能轻松问 AI："这段代码有 Bug 吗？"
+- **Code Polisher (代码磨光机)**: 遗留代码克星。通过精心设计的提示词工程，帮助你重构复杂的业务逻辑。
+- **PR Review (PR 审查)**: 模拟高级架构师的审查视角，自动分析代码合并请求的风险。
+
+### 📸 功能深度预览
+
+#### 🤖 Task Runner (死磕模式)
+
+自动重试修复编译错误或测试失败。
+
+<img src="docs/images/task-runner.png" alt="Task Runner 死磕模式 - dotnet build 自动修复" width="800">
+
+#### ✨ Code Polisher (代码磨光机)
+
+生成专家级的提示词，帮助移除死代码和简化逻辑。
+
+<img src="docs/images/code-polisher.png" alt="Code Polisher 生成 Python 和 C# 重构提示词" width="800">
+
+#### 🔍 Smart PR Review (智能审查)
+
+扫描 Git 未提交变更，生成结构化上下文包供 LLM 分析。
+
+<img src="docs/images/pr-review.png" alt="PR Review 工具包 - AI 上下文提示词生成" width="800">
 
 ### 📄 许可证 (License)
 
 **GNU Affero General Public License v3.0 (AGPL-3.0)**
 
-本项目采用 **AGPL-3.0** 协议授权。这是最严格的开源协议，确保：
+本项目采用 AGPL-3.0 协议授权。这是最严格的开源协议之一，请注意：
 
-- 任何修改或衍生作品也都必须开源。
-- 严禁集成到专有（闭源）软件中。
-- 如果通过网络提供本软件的服务，必须公开源代码。
-
-**本项目非卖品，未经明确许可，不得进行商业闭源授权或通过出售获利。**
+- ✅ **必须开源**：任何修改或基于本项目的衍生作品都必须保持开源。
+- 🚫 **严禁闭源集成**：不得将本项目集成到专有（闭源）软件中。
+- 🌐 **网络服务披露**：如果通过网络提供本软件的服务，必须向用户公开源代码。
+- ❌ **非商业售卖**：本项目非卖品，未经明确许可，不得进行商业闭源授权或通过出售获利。

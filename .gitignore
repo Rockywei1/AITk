@@ -55,3 +55,13 @@ App_Data/
 # Rider
 .idea/
 *.sln.iml
+
+# Publish output
+publish/
+[Pp]ublish/
+
+# Release artifacts
+*.zip
+
+# Backup files
+*_backup.md
